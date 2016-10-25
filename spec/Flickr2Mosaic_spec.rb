@@ -16,4 +16,5 @@ describe Flickr2Mosaic do
   it "should have a nice options parser in its own class" do
     expect{Parser.parse %w(--name Hansi)}.not_to raise_error
   end
+
 end
