@@ -12,4 +12,8 @@ describe Flickr2Mosaic do
   it "should be able to call the CLI via it's class" do
     expect{CLI.start}.to_not raise_error
   end
+
+  it "should have a nice options parser in its own class" do
+    expect{Parser.parse %w(--name Hansi)}.not_to raise_error
+  end
 end
