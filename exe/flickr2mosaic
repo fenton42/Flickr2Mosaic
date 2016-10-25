@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+require 'flickr2mosaic'
+
+flickr2mosaic=Flickr2Mosaic.new
+

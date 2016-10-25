@@ -35,4 +35,5 @@ Gem::Specification.new do |spec|
   
   
   spec.add_dependency "rmagick", "~> 2.16"
+  spec.add_dependency "flickraw"
 end

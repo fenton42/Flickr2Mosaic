@@ -51,7 +51,7 @@ Or install it yourself as:
 
 This GEM is mainly to be used as part of a Command Line Tool to solve the above given task.
 
-Idea: flickr2mosaic --tags=sports,crime,snow,dog,cat,clouds,light,white,black,winter --layout=
+Idea: flickr2mosaic --tags=sports,crime,snow,dog,cat,clouds,light,white,black,winter --output=myfile.png
 
 ## Development
 
