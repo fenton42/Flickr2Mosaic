@@ -1,10 +1,7 @@
-class CLI
-
-  def self.start
-    self.download
+module Flickr2Mosaic
+  class CLI
+    def self.start
+      Processing.new.perform
+    end
   end
-
-  def self.download
-  end
-
 end

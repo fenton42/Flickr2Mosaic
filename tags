@@ -1,0 +1,21 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CLI	lib/Flickr2Mosaic/c_l_i.rb	/^  class CLI$/;"	c	class:Flickr2Mosaic
+Flickr2Mosaic	lib/Flickr2Mosaic.rb	/^module Flickr2Mosaic$/;"	m
+Flickr2Mosaic	lib/Flickr2Mosaic/c_l_i.rb	/^module Flickr2Mosaic$/;"	m
+Flickr2Mosaic	lib/Flickr2Mosaic/processing.rb	/^module Flickr2Mosaic$/;"	m
+Flickr2Mosaic	lib/Flickr2Mosaic/version.rb	/^module Flickr2Mosaic$/;"	m
+Flickr2Mosaic	spec/lib/cli_spec.rb	/^module Flickr2Mosaic$/;"	m
+Flickr2Mosaic	spec/lib/processing_spec.rb	/^module Flickr2Mosaic$/;"	m
+Parser	lib/Flickr2Mosaic/parser.rb	/^class Parser$/;"	c
+Processing	lib/Flickr2Mosaic/processing.rb	/^  class Processing$/;"	c	class:Flickr2Mosaic
+TagHelper	pre-tests/flickraw.rb	/^class TagHelper$/;"	c
+fetch_tag	pre-tests/flickraw.rb	/^  def fetch_tag$/;"	f	class:TagHelper
+initialize	pre-tests/flickraw.rb	/^  def initialize(tags,taglist)$/;"	f	class:TagHelper
+parse	lib/Flickr2Mosaic/parser.rb	/^  def self.parse(options)$/;"	F	class:Parser
+perform	lib/Flickr2Mosaic/processing.rb	/^    def perform$/;"	f	class:Flickr2Mosaic.Processing
+start	lib/Flickr2Mosaic/c_l_i.rb	/^    def self.start$/;"	F	class:Flickr2Mosaic.CLI
