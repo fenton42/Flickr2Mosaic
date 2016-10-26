@@ -5,5 +5,9 @@ describe Flickr2Mosaic::Downloader do
   it 'should be able to initialize the downloader' do
     expect{subject.class.new}.not_to raise_error
   end
+
+  it 'should be able to search for a tag at flickr and to return a url' do
+    
+  end
 end
 
