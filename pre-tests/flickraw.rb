@@ -38,7 +38,7 @@ FlickRaw.api_key=api_key
 FlickRaw.shared_secret=secret_key
 
 
-#get nice tags
+#get nice tags 
 unless File.exist?('taglist.txt') 
   File.open('taglist.txt','w') do |file|
     flickr.tags.getHotList["tag"].map{|a| a["_content"]}.each do |tag|
