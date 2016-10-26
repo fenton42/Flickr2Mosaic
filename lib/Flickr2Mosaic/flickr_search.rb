@@ -26,5 +26,16 @@ module Flickr2Mosaic
         nil
       end
     end
+
+    def get_urls_by_tags(taglist) 
+      urllist = Array.new
+      taglist.each do |tag|
+        url = get_url_by_search_tag(tag)
+        if url
+          urllist << url 
+        end
+      end
+      urllist
+    end
   end
 end

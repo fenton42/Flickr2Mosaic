@@ -17,6 +17,12 @@ describe Flickr2Mosaic::FlickrSearch do
       expect(subject.get_url_by_search_tag('dfjldksjfldsfjlksadjf')).to be_nil
     end
   end
+  
+  it 'should be able to search for a tag list and skip tags where nothing can be found' do
+    VCR.use_cassette "many_search_tags" do
+      expect(subject.get_urls_by_tags(['computer','red','dfjldksjfldsfjlksadjf']).count).to be == 2
+    end
+  end
 
 end
 
