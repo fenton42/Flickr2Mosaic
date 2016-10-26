@@ -13,8 +13,8 @@ describe Flickr2Mosaic::FlickrSearch do
   end
 
   it 'should be able to search for a tag at flickr and to return nil if nothing found' do
-    VCR.use_cassette "search_tag_computer" do
-      expect(subject.get_url_by_search_tag('computer')).to match( /^http/ )
+    VCR.use_cassette "search_tag_gobbledegook" do
+      expect(subject.get_url_by_search_tag('dfjldksjfldsfjlksadjf')).to be_nil
     end
   end
 
