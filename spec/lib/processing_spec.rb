@@ -25,6 +25,10 @@ module Flickr2Mosaic
       Flickr2Mosaic::CLI.start
     end
 
+    it 'should be able to fetch 10 different image urls for 10 tags from the downloader' do
+      expect(@processing.fetch_urls.count).to be == 10
+    end
+
     it 'should be able to fetch 10 different images for 10 tags from the downloader' do
       expect(Dir.entries(TMP).select{|f| f =~ /jpg$/ }.count).to be == 0
       @processing.download

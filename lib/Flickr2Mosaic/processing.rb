@@ -11,6 +11,10 @@ module Flickr2Mosaic
       create_mosaic()
     end
 
+    def fetch_urls
+      1.upto 10
+    end
+
     def download
       1.upto 10 do |num|
         File.open( [self.tmpdir, num.to_s+".jpg"].join('/'),"w"){}
