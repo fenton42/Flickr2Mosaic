@@ -14,18 +14,18 @@ describe Flickr2Mosaic::Taglist do
     @taglist=Flickr2Mosaic::Taglist.new(filename: 'spec/fixtures/taglist.txt')
     expect(@taglist.taglist).to eq %w(hans nase otto karl)
   end
-  
+
   it 'should raise an exception if a _given_ file does not exist (no hotlist fallback)' do
     expect{Flickr2Mosaic::Taglist.new(filename: 'spec/fixtures/doesnotexist.txt')}.to raise_error(RuntimeError)
   end
-  
+
   it 'should raise an exception if a file does not contain the correct format' do
     expect{Flickr2Mosaic::Taglist.new(filename: 'spec/fixtures/wrong_format.txt')}.to raise_error(TagListFormatError)
   end
-  
+
   it 'should respect the limit parameter' do
-    @taglist=Flickr2Mosaic::Taglist.new(filename: 'spec/fixtures/taglist.txt', limit: 2)
-    expect(@taglist.taglist).to eq %w(hans nase)
+    taglist=Flickr2Mosaic::Taglist.new(filename: 'spec/fixtures/taglist.txt', limit: 2)
+    expect(taglist.taglist).to eq %w(hans nase)
   end
 
   it 'should be able to provide me with another tag from a file if asked to' do

@@ -2,6 +2,7 @@
 class TagListFormatError < RuntimeError
 end
 
+
 module Flickr2Mosaic
 
   class Taglist
@@ -15,17 +16,7 @@ module Flickr2Mosaic
       self.taglist_limit = params[:limit] || 1000 #1000 tags should be enough
       if self.taglist_file 
         if File.exist? self.taglist_file
-          self.taglist = Array.new
-          pre_taglist = File.readlines( taglist_file, self.taglist_limit )
-          num=1
-          pre_taglist.each do |line|
-            if line =~ /^(\w+)[\r\n]*$/
-              self.taglist << $1
-            else
-              raise TagListFormatError, "Format Error in line #{num}. Only 1 word per line allowed. Filename: #{self.taglist_file}"
-            end
-            num += 1
-          end
+          self.taglist = read_lines_until_limit
         else
           raise "File not found #{self.taglist_file}"
         end
@@ -44,5 +35,22 @@ module Flickr2Mosaic
       flickr.tags.getHotList(count: count)["tag"].map{|a| a["_content"]}
     end
 
+    private
+
+    def read_lines_until_limit
+      local_taglist = Array.new
+      numlines=0
+      File.open( taglist_file ).each do |line|
+        break if numlines >= self.taglist_limit
+        next if line.blank? 
+        if line =~ /^(\w+)[\r\n]*$/
+          local_taglist << $1
+        else
+          raise TagListFormatError, "Format Error in line #{numlines}. Only 1 word per line allowed. Filename: #{self.taglist_file}. Line: #{line}"
+        end
+        numlines += 1
+      end
+      local_taglist
+    end
   end
 end
