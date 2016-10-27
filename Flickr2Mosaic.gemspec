@@ -36,6 +36,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "webmock", "~> 2.1"
   
   
-  spec.add_dependency "rmagick", "~> 2.16"
+  spec.add_dependency "mini_magick" #, "~> 2.16"
   spec.add_dependency "flickraw", "~> 0.9.9"
 end

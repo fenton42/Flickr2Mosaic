@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in Flickr2Mosaic.gemspec
+# Specify your gem's dependencies in flickr2mosaic.gemspec
 gemspec

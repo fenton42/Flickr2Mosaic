@@ -4,9 +4,14 @@ module Flickr2Mosaic
     attr_accessor :tmpdir
     attr_accessor :user_taglist
     attr_accessor :numpics
-    
+
     attr_accessor :opt_filename
     attr_accessor :opt_tags
+
+
+    attr_accessor :urls
+    attr_accessor :filenames
+
 
     def initialize(params={})
       self.tmpdir       = params[:tmpdir] || '/tmp'
@@ -22,10 +27,8 @@ module Flickr2Mosaic
     #the actual processing when the program is called
     #error handling being performed inside subroutines, i.e. via exceptions
     def perform
-      urls = fetch_urls
-      urls.each do |url|
-        download(url)
-      end
+      fetch_urls
+      download_all
       create_mosaic
     end
 
@@ -44,12 +47,22 @@ module Flickr2Mosaic
         end
         urls << url
       end
-      urls
+      @urls=urls
     end
 
-    def download(url)
-      1.upto 10 do |num|
-        File.open( [self.tmpdir, num.to_s+".jpg"].join('/'),"w"){}
+    def download_all
+      downloader = Downloader.new(tmpdir: self.tmpdir)
+      @filenames=[]
+      @urls.each do |url|
+        @filenames << downloader.download(url)
+      end
+      @filenames
+    end
+
+    def cleanup
+      @filenames.each do |filename|
+        #Exception will be raised by File.delete
+        File.delete(filename)
       end
     end
 

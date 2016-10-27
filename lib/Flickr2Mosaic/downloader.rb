@@ -1,9 +1,9 @@
 module Flickr2Mosaic
-  class  Downloader
-    attr_accessor :output_dir
+  class Downloader
+    attr_accessor :tmpdir
     def initialize(params={})
       #I can't use a tempfile/tempdir block, as I need the files for later
-      self.output_dir = params[:output_dir] || '/tmp/'
+      self.tmpdir = params[:tmpdir] || '/tmp/'
     end
 
     #Just downloads the file from the given url
@@ -14,7 +14,7 @@ module Flickr2Mosaic
     #
     #returns the full path of the image
     def download(url,filename=nil)
-      path = File.join(self.output_dir,filename_from_url(url))
+      path = File.join(self.tmpdir,filename_from_url(url))
       open(url) do |f|
         File.open(path,"wb") do |file|
           file.puts f.read

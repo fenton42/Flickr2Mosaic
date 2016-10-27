@@ -1,4 +1,4 @@
-# Flickr2Mosaic
+# flickr2mosaic
 
 Your mission, should you choose to accept it
 ============================================
@@ -36,7 +36,7 @@ Assuming you are using MacOSX, please perform a
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'Flickr2Mosaic'
+gem 'flickr2mosaic'
 ```
 
 And then execute:
@@ -45,13 +45,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install Flickr2Mosaic
+    $ gem install flickr2mosaic
 
 ## Usage
 
 This GEM is mainly to be used as part of a Command Line Tool to solve the above given task.
 
-Idea: flickr2mosaic --tags=sports,crime,snow,dog,cat,clouds,light,white,black,winter --output=myfile.png
+  Idea: flickr2mosaic --tags=sports,crime,snow,dog,cat,clouds,light,white,black,winter --output=./myfile.png --tmpdir=/tmp/
 
 ## Development
 
@@ -61,7 +61,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/Flickr2Mosaic.
+Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/flickr2mosaic.
 
 
 ## License
