@@ -21,7 +21,7 @@ module Flickr2Mosaic
                                    per_page: 10,
                                    content_type: 1 #just photos 
       }).to_a
-      @logger.debug photos.to_yaml
+      #@logger.debug photos.to_yaml
       unless photos.nil? or photos.empty?
         id = photos.shift.id
         info = flickr.photos.getInfo(:photo_id => id)

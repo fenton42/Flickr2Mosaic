@@ -2,5 +2,5 @@
 
 require 'flickr2mosaic'
 
-flickr2mosaic=Flickr2Mosaic.new
+Flickr2Mosaic::CLI.start
 

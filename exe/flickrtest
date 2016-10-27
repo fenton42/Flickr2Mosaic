@@ -1,2 +1,2 @@
 #!/usr/bin/env ruby
-require 'Flickr2Mosaic'
+require 'flickr2mosaic'

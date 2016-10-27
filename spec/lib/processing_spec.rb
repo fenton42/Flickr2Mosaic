@@ -17,27 +17,41 @@ module Flickr2Mosaic
     end
 
     it 'should provide a perform method' do
-      expect{ @processing.perform }.not_to raise_error
+      VCR.use_cassette(:perform) do 
+        expect{ @processing.perform }.not_to raise_error
+      end
     end
 
     it 'should trigger the download' do
-      expect_any_instance_of(Flickr2Mosaic::Processing).to receive(:download).at_least(:once).and_return 10
-      Flickr2Mosaic::CLI.start
+      VCR.use_cassette(:processing_download) do
+        expect_any_instance_of(Flickr2Mosaic::Processing).to receive(:download).at_least(:once).and_return 10
+        Flickr2Mosaic::CLI.start
+      end
     end
 
     it 'should be able to fetch 10 different image urls for 10 tags from the downloader' do
-      expect(@processing.fetch_urls.count).to be == 10
+
+      VCR.use_cassette(:processing_fetch_urls) do
+        urls = @processing.fetch_urls
+          expect(urls.count).to be == 10
+          expect(urls.first).to match(/^http/)
+      end
     end
 
     it 'should be able to fetch 10 different images for 10 tags from the downloader' do
-      expect(Dir.entries(TMP).select{|f| f =~ /jpg$/ }.count).to be == 0
-      @processing.download("some_url")
-      expect(Dir.entries(TMP).select{|f| f =~ /jpg$/ }.count).to be == 10
+
+      VCR.use_cassette(:processing_download_10_different) do
+        expect(Dir.entries(TMP).select{|f| f =~ /jpg$/ }.count).to be == 0
+        @processing.download("some_url")
+        expect(Dir.entries(TMP).select{|f| f =~ /jpg$/ }.count).to be == 10
+      end
     end
 
     it 'should trigger the mosaic creation' do
-      expect_any_instance_of(Flickr2Mosaic::Processing).to receive(:create_mosaic)
-      Flickr2Mosaic::CLI.start
+      VCR.use_cassette(:processing_create_mosaic) do
+        expect_any_instance_of(Flickr2Mosaic::Processing).to receive(:create_mosaic)
+        Flickr2Mosaic::CLI.start
+      end
     end
 
   end

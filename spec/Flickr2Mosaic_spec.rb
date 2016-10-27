@@ -10,7 +10,7 @@ describe Flickr2Mosaic do
   end
 
   it "should be able to call the CLI via it's class" do
-    expect{Flickr2Mosaic::CLI.start}.to_not raise_error
+    expect(Flickr2Mosaic::CLI.respond_to?(:start)).to be == true
   end
 
   it "should have a nice options parser in its own class" do
