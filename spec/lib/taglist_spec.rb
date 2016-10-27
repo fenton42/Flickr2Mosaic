@@ -28,6 +28,13 @@ describe Flickr2Mosaic::Taglist do
     expect(taglist.taglist).to eq %w(hans nase)
   end
 
+  it 'should return nil if there is no element left' do
+    taglist=Flickr2Mosaic::Taglist.new(filename: 'spec/fixtures/taglist.txt', limit: 2)
+    expect(taglist.next).to eq "hans"
+    expect(taglist.next).to eq "nase"
+    expect(taglist.next).to be_nil
+  end
+
   it 'should be able to provide me with another tag from a file if asked to' do
     VCR.use_cassette "hotlist_20" do
       @taglist=Flickr2Mosaic::Taglist.new
@@ -36,7 +43,7 @@ describe Flickr2Mosaic::Taglist do
   end
 
   it 'should be able to provide me with a list of tags from Flickr (hotlist)' do
-    VCR.use_cassette "hotlist_20" do
+    VCR.use_cassette "hotlist_20_query" do
       expect(subject.hotlist).to be_kind_of Array
       expect(subject.hotlist.count).to be == 20
     end

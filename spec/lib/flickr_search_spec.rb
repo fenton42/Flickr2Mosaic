@@ -11,6 +11,13 @@ describe Flickr2Mosaic::FlickrSearch do
       expect(subject.get_url_by_search_tag('computer')).to match( /^http/ )
     end
   end
+  
+  it 'should be able to search for a tag at flickr and to return a url' do
+    VCR.use_cassette "search_hotlist" do
+      expect(@list = subject.get_hotlist(5)).to be_kind_of Array
+      expect(@list.count).to be == 5
+    end
+  end
 
   it 'should be able to search for a tag at flickr and to return nil if nothing found' do
     VCR.use_cassette "search_tag_gobbledegook" do

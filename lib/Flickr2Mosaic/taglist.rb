@@ -32,7 +32,7 @@ module Flickr2Mosaic
     #This being more or less a goodie. I could also just raise an exception
     #if there is no file with tags...
     def hotlist(count=20)
-      flickr.tags.getHotList(count: count)["tag"].map{|a| a["_content"]}
+      FlickrSearch.new.get_hotlist(count)
     end
 
     private

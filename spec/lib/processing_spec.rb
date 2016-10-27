@@ -21,7 +21,7 @@ module Flickr2Mosaic
     end
 
     it 'should trigger the download' do
-      expect_any_instance_of(Flickr2Mosaic::Processing).to receive(:download).and_return 10
+      expect_any_instance_of(Flickr2Mosaic::Processing).to receive(:download).at_least(:once).and_return 10
       Flickr2Mosaic::CLI.start
     end
 
@@ -31,7 +31,7 @@ module Flickr2Mosaic
 
     it 'should be able to fetch 10 different images for 10 tags from the downloader' do
       expect(Dir.entries(TMP).select{|f| f =~ /jpg$/ }.count).to be == 0
-      @processing.download
+      @processing.download("some_url")
       expect(Dir.entries(TMP).select{|f| f =~ /jpg$/ }.count).to be == 10
     end
 

@@ -17,7 +17,11 @@ module Flickr2Mosaic
     end
 
     def get_url_by_search_tag(tag)
-      photos=flickr.photos.search({tags: tag, sort: 'interestingness-desc', per_page: 10}).to_a
+      photos=flickr.photos.search({tags: tag, sort: 'interestingness-desc', 
+                                   per_page: 10,
+                                   content_type: 1 #just photos 
+      }).to_a
+      @logger.debug photos.to_yaml
       unless photos.nil? or photos.empty?
         id = photos.shift.id
         info = flickr.photos.getInfo(:photo_id => id)
@@ -25,6 +29,10 @@ module Flickr2Mosaic
       else
         nil
       end
+    end
+
+    def get_hotlist(count)
+      flickr.tags.getHotList(count: count)["tag"].map{|a| a["_content"]}
     end
 
     def get_urls_by_tags(taglist) 
