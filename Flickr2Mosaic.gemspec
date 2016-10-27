@@ -1,10 +1,10 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'Flickr2Mosaic/version'
+require 'flickr2mosaic/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "Flickr2Mosaic"
+  spec.name          = "flickr2mosaic"
   spec.version       = Flickr2Mosaic::VERSION
   spec.authors       = ["Tobias Overkamp"]
   spec.email         = ["fenton42@tov.io"]
@@ -37,5 +37,5 @@ Gem::Specification.new do |spec|
   
   
   spec.add_dependency "rmagick", "~> 2.16"
-  spec.add_dependency "flickraw"
+  spec.add_dependency "flickraw", "~> 0.9.9"
 end

@@ -14,6 +14,12 @@ describe Flickr2Mosaic::Taglist do
     @taglist=Flickr2Mosaic::Taglist.new(filename: 'spec/fixtures/taglist.txt')
     expect(@taglist.taglist).to eq %w(hans nase otto karl)
   end
+  
+  it 'should be able to initialize the taglist with own parameters that have precedence' do
+    @taglist=Flickr2Mosaic::Taglist.new(own_tags: %w(fritz philip), filename: 'spec/fixtures/taglist.txt')
+    expect(@taglist.own_tags).to eq %w(fritz philip)
+    expect(@taglist.taglist).to eq %w(hans nase otto karl)
+  end
 
   it 'should raise an exception if a _given_ file does not exist (no hotlist fallback)' do
     expect{Flickr2Mosaic::Taglist.new(filename: 'spec/fixtures/doesnotexist.txt')}.to raise_error(RuntimeError)
@@ -29,7 +35,9 @@ describe Flickr2Mosaic::Taglist do
   end
 
   it 'should return nil if there is no element left' do
-    taglist=Flickr2Mosaic::Taglist.new(filename: 'spec/fixtures/taglist.txt', limit: 2)
+    taglist=Flickr2Mosaic::Taglist.new(no_random: true,
+                                       filename: 'spec/fixtures/taglist.txt', 
+                                       limit: 2)
     expect(taglist.next).to eq "hans"
     expect(taglist.next).to eq "nase"
     expect(taglist.next).to be_nil

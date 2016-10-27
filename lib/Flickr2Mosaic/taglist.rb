@@ -9,9 +9,13 @@ module Flickr2Mosaic
     attr_accessor :taglist_file
     attr_accessor :taglist
     attr_accessor :taglist_limit
+    attr_accessor :own_tags
+    attr_accessor :norandom
 
     def initialize(params={})
       #TODO shorten this long method
+      self.own_tags = params[:own_tags] || []
+      self.norandom = params[:no_random] || false
       self.taglist_file = params[:filename]
       self.taglist_limit = params[:limit] || 1000 #1000 tags should be enough
       if self.taglist_file 
@@ -26,7 +30,15 @@ module Flickr2Mosaic
     end
 
     def next
-      self.taglist.shift
+      ret = nil
+      if self.norandom
+        ret = self.taglist.shift
+      else
+        #random element from taglist
+        ret = self.taglist.sample
+        self.taglist -= [ret]
+      end
+      ret
     end
 
     #This being more or less a goodie. I could also just raise an exception
