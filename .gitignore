@@ -10,3 +10,4 @@
 /secrets/*
 *jpg
 *.swp
+/spec/fixtures/vcr_cassettes/*
