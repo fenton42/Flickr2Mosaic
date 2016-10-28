@@ -29,6 +29,8 @@ get the challenge done.
 
 ## Installation
 
+Make sure to have ruby-2.3 or better!
+
   I fear this tool works only on *UX operating systems due to the ImageMagick/GraphicsMagick requirement.
   
 Make sure to have some kind of ImageMagick or GraphicsMagick installed.
