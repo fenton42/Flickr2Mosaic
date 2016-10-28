@@ -9,5 +9,6 @@
 /tmp/
 /secrets/*
 *.swp
+*.jpg
 /spec/fixtures/vcr_cassettes/*
 tags
