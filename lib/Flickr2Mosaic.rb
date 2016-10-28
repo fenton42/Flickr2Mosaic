@@ -7,6 +7,7 @@ require 'flickr2mosaic/downloader'
 require 'flickr2mosaic/mosaic_generator'
 require 'flickr2mosaic/flickr_search'
 require 'flickr2mosaic/taglist'
+require 'flickr2mosaic/magick'
 
 require 'logger'
 require 'yaml'

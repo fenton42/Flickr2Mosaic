@@ -30,6 +30,7 @@ module Flickr2Mosaic
       fetch_urls
       download_all
       create_mosaic
+      cleanup
     end
 
     def fetch_urls
@@ -68,6 +69,8 @@ module Flickr2Mosaic
     end
 
     def create_mosaic
+      mosaic_generator = MosaicGenerator.new(:filenames => self.filenames)
+      mosaic_generator.perform
     end
 
 
