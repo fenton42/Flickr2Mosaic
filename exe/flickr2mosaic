@@ -2,5 +2,5 @@
 
 require 'flickr2mosaic'
 
-Flickr2Mosaic::CLI.start
+Flickr2Mosaic::CLI.start(ARGV)
 
