@@ -12,3 +12,4 @@
 *.jpg
 /spec/fixtures/vcr_cassettes/*
 tags
+*.gem
