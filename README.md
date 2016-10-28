@@ -54,7 +54,7 @@ git clone https://github.com/fenton42/Flickr2Mosaic.git
 ```
   2. Build the gem:
 ```ruby
-  cd Flickr2Mosaic && gem build Flickr2Mosaic.gemspec
+  cd Flickr2Mosaic && gem build flickr2mosaic.gemspec
 ```
   3.Install the GEM (change the version number accordingly)
 ```ruby
