@@ -8,7 +8,6 @@
 /spec/reports/
 /tmp/
 /secrets/*
-*jpg
 *.swp
 /spec/fixtures/vcr_cassettes/*
 tags
