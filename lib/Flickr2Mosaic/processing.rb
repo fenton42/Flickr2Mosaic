@@ -43,7 +43,8 @@ module Flickr2Mosaic
         while !url do
           tag = taglist.next
           raise "No more tags available" if tag.nil?
-          url = FlickrSearch.new.get_url_by_search_tag(tag)
+          #do not use double images. Therefore the urls-array has to be provided
+          url = FlickrSearch.new.get_url_by_search_tag(tag,urls)
         end
         urls << url
       end

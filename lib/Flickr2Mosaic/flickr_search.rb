@@ -16,19 +16,27 @@ module Flickr2Mosaic
       FlickRaw.shared_secret=secret_key
     end
 
-    def get_url_by_search_tag(tag)
+    def get_url_by_search_tag(tag,already_found=[])
+      url=nil
       photos=flickr.photos.search({tags: tag, sort: 'interestingness-desc', 
-                                   per_page: 10,
+                                   per_page: 15,
                                    content_type: 1 #just photos 
       }).to_a
       #@logger.debug photos.to_yaml
       unless photos.nil? or photos.empty?
-        id = photos.shift.id
-        info = flickr.photos.getInfo(:photo_id => id)
-        FlickRaw.url_b(info)
-      else
-        nil
+        while url.nil?
+          id = photos.shift.id
+          #should never happen: Fetch 15 pictures, only 9 can be in list
+          raise "No more pictures left that haven't already been used" unless id
+          info = flickr.photos.getInfo(:photo_id => id)
+          url = FlickRaw.url_b(info)
+          if already_found.include? url
+            #loop again
+            url=nil
+          end
+        end
       end
+      url
     end
 
     def get_hotlist(count)

@@ -33,7 +33,7 @@ module Flickr2Mosaic
 
       VCR.use_cassette(:processing_fetch_urls) do
         urls = @processing.fetch_urls
-        expect(urls.count).to be == 10
+        expect(urls.uniq.count).to be == 10
         expect(urls.first).to match(/^http/)
       end
     end
@@ -60,9 +60,13 @@ module Flickr2Mosaic
         count_before = Dir.entries(TMP).select{|f| f =~ /jpg$/ }.count
         @processing.fetch_urls
         @processing.download_all
-        expect(Dir.entries(TMP).select{|f| f =~ /jpg$/ }.count - 10).to be == count_before
+        @processing.filenames.each do |filename|
+          expect( File.exists? filename ).to be_truthy
+        end
         @processing.cleanup
-        expect(Dir.entries(TMP).select{|f| f =~ /jpg$/ }.count).to be == count_before
+        @processing.filenames.each do |filename|
+          expect( File.exists? filename ).to be_falsey
+        end
       end
     end
 

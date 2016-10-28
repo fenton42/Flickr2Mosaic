@@ -36,6 +36,15 @@ module Flickr2Mosaic
       x = self.width_x * x_count
       y = self.width_y * y_count
 
+      #modifies the image in place
+      image = MiniMagick::Image.new(filename)
+      #image.path #=> "input.jpg"
+      #
+      #resizing so that it fits more or less the field size. Don't stretch it
+      image.resize "100x100^"  #the "^" means _minimum_ 100x100, so it may be 200x100 but not 100x50
+      image.crop "100x100+0+0" #offset may need to be calculated. 1 side should already be OK
+                               #the other has to be moved by (current-desired)/2 -1 (-1 to be save)
+      see above comments!
     end
   end
 end
