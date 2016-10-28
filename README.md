@@ -51,7 +51,14 @@ Or install it yourself as:
 
 This GEM is mainly to be used as part of a Command Line Tool to solve the above given task.
 
-  Idea: flickr2mosaic --tags=sports,crime,snow,dog,cat,clouds,light,white,black,winter --output=./myfile.png --tmpdir=/tmp/
+  flickr2mosaic --tags=sports,crime,snow,dog,cat,clouds,light,white,black,winter --output=./myfile.png --tmpdir=/tmp/
+
+It definitively needs a Flickr-API-Key to work.
+You may provide the key via an environment variable or some secret files:
+
+     api_key= ENV[:FLICKR_API_KEY.to_s] || fetch_key_from_file('~/.flickr2mosaic/api_key.txt') 
+     secret_key = ENV[:FLICKR_SECRET_KEY.to_s] || fetch_key_from_file('~/.flickr2mosaic/secret_key.txt')
+     
 
 ## Development
 

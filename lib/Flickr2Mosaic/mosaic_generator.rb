@@ -9,7 +9,10 @@ module Flickr2Mosaic
     attr_accessor :column_width
     attr_accessor :column_height
 
+    attr_accessor :output_file
+
     #needs params[:filenames] to be an array[10] of filenames
+    #needs params[:output_file]
     def initialize(params={})
       #I need a mapping for the images
       #
@@ -55,6 +58,9 @@ module Flickr2Mosaic
       #will only be a problem, if the output size can be chosen by the cli-user
       @column_width  = self.width_x / 4
       @column_height = self.width_y / 3
+
+      self.output_file = params[:output_file]
+      raise "Need an output file to write a picture" unless self.output_file
     end
 
     def perform
@@ -64,7 +70,8 @@ module Flickr2Mosaic
 
     def create_image
       #TODO move to magick...
-      output = '/tmp/output.jpg'
+      output = self.output_file
+      STDERR.puts "Writing to Output-File: " + self.output_file
 
       #this is documented but doesn't work... Sadly...
       #see https://github.com/minimagick/minimagick/issues/59
@@ -81,9 +88,8 @@ module Flickr2Mosaic
         new_image << output
       end
 
-
       self.filenames.each_with_index do |path,index|
-        puts "path, index:  #{path},#{index}"
+        #puts "path, index:  #{path},#{index}"
         #they have to be resized before
         first_image  = MiniMagick::Image.new(output)
         second_image = MiniMagick::Image.new(path)
@@ -95,7 +101,7 @@ module Flickr2Mosaic
           #in the layout array
           layout_position = self.layout.index(index+1)
           x_offset, y_offset = canvas_offset_from_position(layout_position)
-          puts "x_offset, y_offset:  #{x_offset},#{y_offset}"
+          #puts "x_offset, y_offset:  #{x_offset},#{y_offset}"
           c.geometry "+#{x_offset}+#{y_offset}"
         end
         result.write(output)
@@ -108,7 +114,7 @@ module Flickr2Mosaic
       self.filenames.each_with_index do |filename,index|
         picnum = index + 1
         x,y = layout_sizes_for_picture(picnum)
-        puts "Picture #{picnum}, layout sizes #{x}, #{y}"
+        #puts "Picture #{picnum}, layout sizes #{x}, #{y}"
         resize_picture(filename,x,y)
       end
     end

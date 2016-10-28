@@ -1,6 +1,6 @@
 require 'optparse'
 
-Options = Struct.new(:name)
+Options = Struct.new(:tags, :output, :taglist, :secretfile)
 
 class Parser
   def self.parse(options)
@@ -9,16 +9,20 @@ class Parser
     opt_parser = OptionParser.new do |opts|
       opts.banner = "Usage: example.rb [options]"
 
-      opts.on("-tTAGLIST", "--name=TAGLIST", "List of tags, comma separated") do |n|
-        args.name = t
+      opts.on("-tTAGS", "--tags=TAGS", "List of tags, comma separated") do |t|
+        args.tags = t
       end
 
       opts.on("-oOUTPUT", "--output=OUTPUT", "path of the desired output file") do |o|
-        args.name = o
+        args.output = o
       end
       
-      opts.on("-iINPUTFILE", "--inputfile=INPUTFILE", "path of a backup keyword list file") do |i|
-        args.name = i
+      opts.on("-lTAGLISTFILE", "--taglist=TAGLISTFILE", "path of a backup keyword list file") do |l|
+        args.taglist = l
+      end
+      
+      opts.on("-sSECRETFILE", "--secret=SECRETFILE", "path of the flickr credentials") do |s|
+        args.taglist = s
       end
 
       opts.on("-h", "--help", "Prints this help") do

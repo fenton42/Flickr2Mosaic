@@ -1,9 +1,10 @@
+require 'tmpdir'
 module Flickr2Mosaic
   class Downloader
     attr_accessor :tmpdir
     def initialize(params={})
       #I can't use a tempfile/tempdir block, as I need the files for later
-      self.tmpdir = params[:tmpdir] || '/tmp/'
+      self.tmpdir = params[:tmpdir] || Dir.tmpdir || '/tmp/'
     end
 
     #Just downloads the file from the given url
@@ -22,11 +23,12 @@ module Flickr2Mosaic
       end 
       path
     end
-
+    
     private 
     def filename_from_url(url) 
       parts = url.split(/\//)
       parts.last
     end
+
   end
 end

@@ -22,21 +22,25 @@ module Flickr2Mosaic
         if File.exist? self.taglist_file
           self.taglist = read_lines_until_limit
         else
-          raise "File not found #{self.taglist_file}"
+          raise "Taglist-File not found #{self.taglist_file}"
         end
       else
+        STDERR.puts "No Taglist File given. Will search tags from Flickr's hotlist"
         self.taglist = self.hotlist(self.taglist_limit)
       end
+      self.taglist
     end
 
     def next
-      ret = nil
-      if self.norandom
-        ret = self.taglist.shift
-      else
-        #random element from taglist
-        ret = self.taglist.sample
-        self.taglist -= [ret]
+      ret = self.own_tags.shift
+      unless ret
+        if self.norandom
+          ret = self.taglist.shift
+        else
+          #random element from taglist
+          ret = self.taglist.sample
+          self.taglist -= [ret]
+        end
       end
       ret
     end

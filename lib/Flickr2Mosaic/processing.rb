@@ -12,12 +12,17 @@ module Flickr2Mosaic
     attr_accessor :urls
     attr_accessor :filenames
 
+    attr_accessor :output_file
+
 
     def initialize(params={})
       self.tmpdir       = params[:tmpdir] || '/tmp'
       self.numpics      = params[:numpics] || 10
       self.opt_filename = params[:filename] || nil
       self.opt_tags     = params[:tags] || []
+      self.output_file  = params[:output] || '/tmp/output.jpg'
+      #puts self.to_yaml
+
 
       #TODO Refactor: I'd prefer to initialize the taglist with the user given parameters.
       #screams: Refactor me...
@@ -43,7 +48,8 @@ module Flickr2Mosaic
         url=nil
         while !url do
           tag = taglist.next
-          raise "No more tags available" if tag.nil?
+          raise "Your taglist is too short for 10 pictures: No more tags available" if tag.nil?
+          puts "trying to find photos for tag #{tag.to_s}"
           #do not use double images. Therefore the urls-array has to be provided
           url = FlickrSearch.new.get_url_by_search_tag(tag,urls)
         end
@@ -69,7 +75,8 @@ module Flickr2Mosaic
     end
 
     def create_mosaic
-      mosaic_generator = MosaicGenerator.new(:filenames => self.filenames)
+      mosaic_generator = MosaicGenerator.new(:filenames => self.filenames,
+                                             :output_file => self.output_file)
       mosaic_generator.perform
     end
 
