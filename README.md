@@ -1,6 +1,6 @@
 # flickr2mosaic
 
-Your mission, should you choose to accept it
+The mission
 ============================================
 
 Write a Ruby command line application that
@@ -29,24 +29,37 @@ get the challenge done.
 
 ## Installation
 
+  I fear this tool works only on *UX operating systems due to the ImageMagick/GraphicsMagick requirement.
+  
 Make sure to have some kind of ImageMagick or GraphicsMagick installed.
 Assuming you are using MacOSX, please perform a
 ``` brew install imagemagick ```
+Using Linux you should use the package manager of your choice
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'flickr2mosaic'
+gem 'fenton42/Flickr2Mosaic'
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
+You may also install the GEM manually:
 
-    $ gem install flickr2mosaic
-
+  1. Fetch the GEM
+```ruby
+git clone https://github.com/fenton42/Flickr2Mosaic.git
+```
+  2. Build the gem:
+```ruby
+  cd Flickr2Mosaic && gem build Flickr2Mosaic.gemspec
+```
+  3.Install the GEM (change the version number accordingly)
+```ruby
+sudo gem install flickr2mosaic-0.1.3.gem
+```
 ## Usage
 
 This GEM is mainly to be used as part of a Command Line Tool to solve the above given task.
@@ -54,7 +67,7 @@ This GEM is mainly to be used as part of a Command Line Tool to solve the above 
   flickr2mosaic --tags=sports,crime,snow,dog,cat,clouds,light,white,black,winter --output=./myfile.png --tmpdir=/tmp/
 
 It definitively needs a Flickr-API-Key to work.
-You may provide the key via an environment variable or some secret files:
+You may provide the key via an environment variable or some secret files: (see filenames below)
 
      api_key= ENV[:FLICKR_API_KEY.to_s] || fetch_key_from_file('~/.flickr2mosaic/api_key.txt') 
      secret_key = ENV[:FLICKR_SECRET_KEY.to_s] || fetch_key_from_file('~/.flickr2mosaic/secret_key.txt')
