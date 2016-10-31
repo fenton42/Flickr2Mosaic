@@ -1,0 +1,1 @@
+docker run -e"FLICKR_API_KEY=`cat ~/.flickr2mosaic/api_key.txt` -e"FLICKR_SECRET_KEY=`cat ~/.flickr2mosaic/secret_key.txt` --rm -ti flickr2mosaic flickr2mosaic "$@"
